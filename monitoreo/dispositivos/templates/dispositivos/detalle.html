@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ dispositivo.nombre }} - EcoEnergy</title>
+  </head>
+  <body>
+    <h1>{{ dispositivo.nombre }}</h1>
+    <p><strong>Modelo:</strong> {{ dispositivo.modelo }}</p>
+    <p><strong>Categoría:</strong> {{ dispositivo.categoria }}</p>
+    <p><strong>Zona:</strong> {{ dispositivo.zona }}</p>
+    <p><strong>Estado:</strong> {{ dispositivo.estado }}</p>
+    <p><strong>Potencia:</strong> {{ dispositivo.potencia_watts }} W</p>
+
+    <a href="{% url 'inicio' %}">Volver al inicio</a>
+  </body>
+</html>

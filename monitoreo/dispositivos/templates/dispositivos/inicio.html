@@ -6,6 +6,19 @@
   </head>
   <body>
     <h1>Página de inicio</h1>
+
+    <!-- AGREGAR ESTO (de la diapositiva): -->
+    <ul>
+      {% for d in dispositivos %}
+      <li>
+        {{ d.nombre }} - {{ d.categoria }}
+        <a href="{% url 'dispositivo' d.id %}">Detalle</a>
+        <!-- Nuevo enlace -->
+      </li>
+      {% empty %}
+      <li>No hay dispositivos.</li>
+      {% endfor %}
+    </ul>
     <p><a href="/panel">Ir al Panel</a></p>
   </body>
 </html>
