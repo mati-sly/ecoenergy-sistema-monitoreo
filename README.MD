@@ -317,7 +317,7 @@ Proyecto académico - Solo para fines educativos
 
 ## 👨‍💻 Autor
 
-Desarrollado como parte de evaluación académica para el curso de Desarrollo Web con Django.
+Desarrollado como parte de evaluación académica para el curso de Backend
 
 ---
 
