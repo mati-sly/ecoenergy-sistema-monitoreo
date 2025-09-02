@@ -1,35 +1,37 @@
 from django.contrib import admin
+from .models import Organization, Category, Zone, Device, Measurement, Alert
 
-# Register your models here.
+@admin.register(Organization)
+class OrganizationAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'created_at']
+    search_fields = ['name', 'email']
 
-from django.contrib import admin
-from .models import Categoria, Zona, Dispositivo, Medicion, Alerta
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'description', 'organization', 'created_at']
+    search_fields = ['name']
+    list_filter = ['organization']
 
-# Register your models here.
-@admin.register(Categoria)
-class CategoriaAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'descripcion', 'created_at']
-    search_fields = ['nombre']
+@admin.register(Zone)
+class ZoneAdmin(admin.ModelAdmin):
+    list_display = ['name', 'location', 'max_capacity', 'organization', 'created_at']
+    search_fields = ['name', 'location']
+    list_filter = ['organization']
 
-@admin.register(Zona)
-class ZonaAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'ubicacion', 'capacidad_maxima', 'created_at']
-    search_fields = ['nombre', 'ubicacion']
+@admin.register(Device)
+class DeviceAdmin(admin.ModelAdmin):
+    list_display = ['name', 'model', 'category', 'zone', 'status', 'power_watts', 'organization']
+    list_filter = ['category', 'zone', 'status', 'organization']
+    search_fields = ['name', 'model']
 
-@admin.register(Dispositivo)
-class DispositivoAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'modelo', 'categoria', 'zona', 'estado', 'potencia_watts']
-    list_filter = ['categoria', 'zona', 'estado']
-    search_fields = ['nombre', 'modelo']
+@admin.register(Measurement)
+class MeasurementAdmin(admin.ModelAdmin):
+    list_display = ['device', 'consumption_kwh', 'timestamp', 'organization']
+    list_filter = ['timestamp', 'device__category', 'organization']
+    search_fields = ['device__name']
 
-@admin.register(Medicion)
-class MedicionAdmin(admin.ModelAdmin):
-    list_display = ['dispositivo', 'consumo_kwh', 'timestamp']
-    list_filter = ['timestamp', 'dispositivo__categoria']
-    search_fields = ['dispositivo__nombre']
-
-@admin.register(Alerta)
-class AlertaAdmin(admin.ModelAdmin):
-    list_display = ['dispositivo', 'tipo_alerta', 'nivel', 'estado', 'fecha_alerta']
-    list_filter = ['tipo_alerta', 'nivel', 'estado', 'fecha_alerta']
-    search_fields = ['dispositivo__nombre', 'mensaje']
+@admin.register(Alert)
+class AlertAdmin(admin.ModelAdmin):
+    list_display = ['device', 'alert_type', 'severity', 'status', 'alert_date', 'organization']
+    list_filter = ['alert_type', 'severity', 'status', 'alert_date', 'organization']
+    search_fields = ['device__name', 'message']
